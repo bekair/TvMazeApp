@@ -11,4 +11,9 @@ public class TvShowRepository : RepositoryBase<TvShow,TvMazeContext>, ITvShowRep
         : base(context)
     {
     }
+
+    public void AddTvShowWithEpisodes(TvShow tvShow)
+    {
+        Insert(tvShow);
+    }
 }

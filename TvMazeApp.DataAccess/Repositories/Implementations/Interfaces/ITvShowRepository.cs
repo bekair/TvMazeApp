@@ -5,5 +5,5 @@ namespace TvMazeApp.DataAccess.Repositories.Implementations.Interfaces;
 
 public interface ITvShowRepository : IRepositoryBase<TvShow>
 {
-    
+    void AddTvShowWithEpisodes(TvShow tvShow);
 }

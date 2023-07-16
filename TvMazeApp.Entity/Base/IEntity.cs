@@ -8,6 +8,4 @@ public interface IEntity
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     int Id { get; set; }
-    
-    long Updated { get; set; }
 }
