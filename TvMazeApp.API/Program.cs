@@ -1,6 +1,28 @@
+using Microsoft.EntityFrameworkCore;
+using TvMazeApp.API.BusinessLayer.Services;
+using TvMazeApp.API.BusinessLayer.Services.Interfaces;
+using TvMazeApp.API.Middlewares;
+using TvMazeApp.Core.Constants;
+using TvMazeApp.DataAccess.Contexts;
+using TvMazeApp.DataAccess.Repositories.Implementations;
+using TvMazeApp.DataAccess.Repositories.Implementations.Interfaces;
+using TvMazeApp.DataAccess.UnitOfWorks;
+using TvMazeApp.DataAccess.UnitOfWorks.Base;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionStringTvMaze = builder.Configuration.GetConnectionString("TvMazeConnection");
+if (string.IsNullOrWhiteSpace(connectionStringTvMaze)) 
+    throw new InvalidOperationException(AppConstant.ErrorMessage.TvMazeConnectionStringNotFound);
+
 // Add services to the container.
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<ITvShowRepository, TvShowRepository>();
+builder.Services.AddScoped<ITvShowsApiService, TvShowsApiService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddDbContext<TvMazeContext>(options => options.UseSqlServer(connectionStringTvMaze));
+builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -14,28 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapControllers();
+app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
 app.Run();
-
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

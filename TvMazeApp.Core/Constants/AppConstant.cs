@@ -10,6 +10,7 @@ public static class AppConstant
         public const string UriParameterNullOrEmpty = "Uri cannot be null or empty.";
         public const string InternalServerError = "Something went wrong with the server. Please contact with the administrator.";
         public const string TvMazeSettingsNotFound = "Cannot find configuration section: {0}";
+        public const string TvMazeConnectionStringNotFound = "TvMazeConnectionString could not be found.";
     }
     
     public static class General
@@ -20,10 +21,12 @@ public static class AppConstant
     public static class InfoMessage
     {
         public const string AlreadyCreatedTvShows = "Tv Shows are already created.";
+        public const string NoTvShowsWithSearchedName = "There are no Tv Shows with the searched name.";
     }
     
     public static class SuccessMessage
     {
         public const string SavedTvShowsSuccessfully = "TV Shows were saved successfully.";
+        public const string FetchedTvShowsSuccessfully = "{0} tv shows were fetched successfully.";
     }
 }

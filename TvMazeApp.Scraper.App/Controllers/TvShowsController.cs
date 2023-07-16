@@ -16,8 +16,8 @@ public class TvShowsController : ControllerBase
         ILogger<TvShowsController> logger,
         ITvShowService tvShowService)
     {
-        _logger = logger;
-        _tvShowService = tvShowService;
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _tvShowService = tvShowService ?? throw new ArgumentNullException(nameof(tvShowService));
     }
         
     [HttpPost]
