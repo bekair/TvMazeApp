@@ -16,8 +16,4 @@
     <ProjectReference Include="..\TvMazeApp.Core\TvMazeApp.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Settings\" />
-  </ItemGroup>
-
 </Project>

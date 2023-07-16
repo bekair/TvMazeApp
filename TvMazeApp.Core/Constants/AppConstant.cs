@@ -21,7 +21,6 @@ public static class AppConstant
     public static class InfoMessage
     {
         public const string AlreadyCreatedTvShows = "Tv Shows are already created.";
-        public const string NoTvShowsWithSearchedName = "There are no Tv Shows with the searched name.";
     }
     
     public static class SuccessMessage

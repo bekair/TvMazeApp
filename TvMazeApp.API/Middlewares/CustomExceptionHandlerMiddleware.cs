@@ -27,20 +27,20 @@ public class CustomExceptionHandlerMiddleware
             var response = context.Response;
             response.ContentType = AppConstant.General.ContentType;
 
-            var apiResponse = new ApiResponseBase
-            (
-                message: exception switch
+            var apiResponse = new
+            {
+                message= exception switch
                 {
                     DataNotFoundException or
                         ParameterException => exception.Message,
                     _ => AppConstant.ErrorMessage.InternalServerError
                 },
-                severity: Severity.Error,
-                statusCode: HttpStatusCode.InternalServerError
-            );
+                severity = Severity.Error.ToString(),
+                statusCode = HttpStatusCode.InternalServerError
+            };
 
             response.StatusCode = StatusCodes.Status500InternalServerError;
-
+            
             await response.WriteAsync(JsonSerializer.Serialize(apiResponse));
         }
     }

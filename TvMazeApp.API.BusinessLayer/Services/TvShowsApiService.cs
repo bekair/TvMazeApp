@@ -26,7 +26,7 @@ public class TvShowsApiService : ServiceBase, ITvShowsApiService
         var tvShows = await UnitOfWork.TvShowRepository.GetTvShowByPartialNameAsync(showName);
         if (!tvShows.Any())
             return new TvShowResponseDto(
-                AppConstant.InfoMessage.NoTvShowsWithSearchedName,
+                string.Empty, 
                 Severity.Info,
                 HttpStatusCode.NoContent
             );
