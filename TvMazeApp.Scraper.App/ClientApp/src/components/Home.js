@@ -1,17 +1,15 @@
 import {Alert, Button, Grid, Snackbar, TextField} from '@mui/material';
 import React, {useState} from 'react';
 import SaveIcon from '@mui/icons-material/Save';
-import {severity_error, severity_success} from '../constants/severity'
+import {severity as severityEnum} from '../constants/severity'
 import {
-    emptyMessage, 
-    errorGeneral, 
-    requiredTvShowNameMessage, 
-    successSaveTvShowsMessage
+    emptyMessage,
+    requiredTvShowNameMessage,
 } from "../constants/message";
 import {saveTvShowsUri} from "../constants/uri";
 
 const Home = () => {
-    const [severity, setSeverity] = useState(severity_success);
+    const [severity, setSeverity] = useState(severityEnum[1]);
     const [message, setMessage] = useState(emptyMessage);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [showName, setShowName] = useState('');
@@ -59,12 +57,14 @@ const Home = () => {
                     throw error;
                 });
             }
-        }).then((_) => {
-            setSeverity(severity_success);
-            setMessage(successSaveTvShowsMessage);
+            
+            return response.json();
+        }).then((response) => {
+            setSeverity(severityEnum[response?.severity]);
+            setMessage(response?.message);
             setOpenSnackbar(true);
         }).catch((error) => {
-            setSeverity(severity_error);
+            setSeverity(severityEnum[2]);
             setMessage(error.Message);
             setOpenSnackbar(true);
         });

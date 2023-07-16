@@ -10,7 +10,7 @@ public class Episode : IEntity
     public int ShowId { get; set; }
     public int SeasonNumber { get; set; }
     public int EpisodeNumber { get; set; }
-    public string? Title { get; set; }
+    public string? Name { get; set; }
     public string? Summary { get; set; }
     
     //Navigation Property

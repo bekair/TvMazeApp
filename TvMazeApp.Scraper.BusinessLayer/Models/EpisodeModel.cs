@@ -16,7 +16,7 @@ public class EpisodeModel : IApiStatus
     [JsonPropertyName(ScraperConstant.JsonPropertyName.EpisodeNumber)]
     public int EpisodeNumber { get; set; }
     
-    public string? Title { get; set; }
+    public string? Name { get; set; }
     
     public string? Summary { get; set; }
     

@@ -1,2 +1,5 @@
-﻿export const severity_success= 'success';
-export const severity_error= 'error';
+﻿export const severity = {
+    0: "info",
+    1: "success",
+    2: "error"
+};

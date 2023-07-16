@@ -16,4 +16,14 @@ public static class AppConstant
     {
         public const string ContentType = "application/json";
     }
+    
+    public static class InfoMessage
+    {
+        public const string AlreadyCreatedTvShows = "Tv Shows are already created.";
+    }
+    
+    public static class SuccessMessage
+    {
+        public const string SavedTvShowsSuccessfully = "TV Shows were saved successfully.";
+    }
 }
