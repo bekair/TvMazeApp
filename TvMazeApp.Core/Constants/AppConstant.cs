@@ -11,6 +11,7 @@ public static class AppConstant
         public const string InternalServerError = "Something went wrong with the server. Please contact with the administrator.";
         public const string TvMazeSettingsNotFound = "Cannot find configuration section: {0}";
         public const string TvMazeConnectionStringNotFound = "TvMazeConnectionString could not be found.";
+        public const string IdLessThanOrEqualToZero = "Id field cannot be less than or equal to '0'.";
     }
     
     public static class General
@@ -26,6 +27,7 @@ public static class AppConstant
     public static class SuccessMessage
     {
         public const string SavedTvShowsSuccessfully = "TV Shows were saved successfully.";
-        public const string FetchedTvShowsSuccessfully = "{0} tv shows were fetched successfully.";
+        public const string FetchedTvShowsSuccessfully = "{0} Tv Shows were fetched successfully.";
+        public const string FetchedEpisodesSuccessfully = "{0} Episodes were fetched successfully.";
     }
 }

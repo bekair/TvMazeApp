@@ -19,6 +19,8 @@ if (string.IsNullOrWhiteSpace(connectionStringTvMaze))
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ITvShowRepository, TvShowRepository>();
 builder.Services.AddScoped<ITvShowsApiService, TvShowsApiService>();
+builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
+builder.Services.AddScoped<IEpisodeApiService, EpisodeApiService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<TvMazeContext>(options => options.UseSqlServer(connectionStringTvMaze));
 builder.Services.AddControllers();

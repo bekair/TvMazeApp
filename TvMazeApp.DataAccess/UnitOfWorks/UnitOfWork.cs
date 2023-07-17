@@ -8,12 +8,15 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly TvMazeContext _context;
     public ITvShowRepository TvShowRepository { get; }
+    public IEpisodeRepository EpisodeRepository { get; }
 
     public UnitOfWork(TvMazeContext context,
-        ITvShowRepository tvShowRepository)
+        ITvShowRepository tvShowRepository, 
+        IEpisodeRepository episodeRepository)
     {
         _context = context;
         TvShowRepository = tvShowRepository;
+        EpisodeRepository = episodeRepository;
     }
 
     public async Task CommitAsync()
