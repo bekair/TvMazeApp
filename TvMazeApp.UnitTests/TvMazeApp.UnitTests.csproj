@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TvMazeApp.API.BusinessLayer\TvMazeApp.API.BusinessLayer.csproj" />
+      <ProjectReference Include="..\TvMazeApp.Scraper.BusinessLayer\TvMazeApp.Scraper.BusinessLayer.csproj" />
     </ItemGroup>
 
 </Project>
