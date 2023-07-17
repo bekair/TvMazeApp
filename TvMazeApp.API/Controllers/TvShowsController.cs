@@ -6,7 +6,7 @@ using TvMazeApp.Core.Exceptions;
 
 namespace TvMazeApp.API.Controllers;
 
-[Route("[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class TvShowsController : ControllerBase
 {
@@ -18,7 +18,7 @@ public class TvShowsController : ControllerBase
     }
         
     [HttpGet]
-    [Route("SearchTvShowsByName/{showName}")]
+    [Route("{showName}")]
     public async Task<IActionResult> SearchTvShowsByName(string showName)
     {
         if (string.IsNullOrWhiteSpace(showName))

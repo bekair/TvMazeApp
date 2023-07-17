@@ -43,6 +43,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton(httpClient);
 builder.Services.AddScoped<ITvShowRepository, TvShowRepository>();
+builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
 builder.Services.AddScoped<IApiCaller, ApiCaller>();
 builder.Services.AddScoped<ITvShowService, TvShowService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

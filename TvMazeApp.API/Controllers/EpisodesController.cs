@@ -6,7 +6,7 @@ using TvMazeApp.Core.Exceptions;
 
 namespace TvMazeApp.API.Controllers;
 
-[Route("[controller]")]
+[Route("api")]
 [ApiController]
 public class EpisodesController : ControllerBase
 {
@@ -18,7 +18,7 @@ public class EpisodesController : ControllerBase
     }
     
     [HttpGet]
-    [Route("GetEpisodesByShowId/{showId:int}")]
+    [Route("TvShows/{showId:int}/Episodes")]
     public async Task<IActionResult> GetEpisodesByShowId(int showId)
     {
         if (showId <= 0)

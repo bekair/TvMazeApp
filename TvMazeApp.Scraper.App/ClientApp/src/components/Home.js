@@ -25,7 +25,7 @@ const Home = () => {
     };
 
     const handleSaveClick = async (_) => {
-        if (showName.length === 0) {
+        if (showName?.trim()?.length === 0) {
             setRequiredError(true);
             setRequiredHelperText(requiredTvShowNameMessage)
             
@@ -36,7 +36,7 @@ const Home = () => {
 
     const handleShowNameChange = (e) => {
         const currentTarget = e.currentTarget.value;
-        if (currentTarget.length > 0) {
+        if (currentTarget?.trim()?.length > 0) {
             setRequiredError(false);
             setRequiredHelperText(emptyMessage)
         }
