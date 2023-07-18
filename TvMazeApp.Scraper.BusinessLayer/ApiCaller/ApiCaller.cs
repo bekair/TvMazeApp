@@ -3,6 +3,7 @@ using TvMazeApp.Core.Exceptions;
 using TvMazeApp.Scraper.BusinessLayer.ApiCaller.Interfaces;
 using TvMazeApp.Scraper.BusinessLayer.Constants;
 using TvMazeApp.Scraper.BusinessLayer.Helpers;
+using TvMazeApp.Scraper.BusinessLayer.Models;
 using TvMazeApp.Scraper.BusinessLayer.Models.Responses;
 
 namespace TvMazeApp.Scraper.BusinessLayer.ApiCaller;
@@ -38,6 +39,20 @@ public class ApiCaller : IApiCaller
             throw new DataNotFoundException(AppConstant.ErrorMessage.NoTvShowExists);
         
         return deserializedShowWithEpisodes;
+    }
+
+    public async Task<TvShowModelWithEpisodes> GetTvShowWithEpisodesByApiId(int apiId)
+    {
+        var uri = string.Format(ScraperConstant.Uri.SearchShowUriById, apiId);
+        
+        var response = (await _httpClient.GetAsync(uri)).EnsureSuccessStatusCode();
+        var deserializedTvShowWithEpisodes = await SerializerHelper.DeserializeAsync<TvShowModelWithEpisodes>(response);
+        
+        if (deserializedTvShowWithEpisodes is null || 
+            deserializedTvShowWithEpisodes.Status == ScraperConstant.ApiStatusResult.NotFound)
+            throw new DataNotFoundException(AppConstant.ErrorMessage.NoTvShowExists);
+        
+        return deserializedTvShowWithEpisodes;
     }
 
     private static void ValidateUri(string uri)

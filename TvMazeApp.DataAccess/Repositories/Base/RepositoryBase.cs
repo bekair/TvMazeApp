@@ -29,17 +29,15 @@ public class RepositoryBase<TEntity, TContext> : IRepositoryBase<TEntity>
             return await query.ToListAsync();
         }
 
-        public virtual async Task<TEntity> GetIncludeByAsync(int id, params Expression<Func<TEntity, object>>[] includeExpressions)
+        public virtual async Task<TEntity> GetIncludeByAsync(Expression<Func<TEntity, bool>>? filter = null, params Expression<Func<TEntity, object>>[] includeExpressions)
         {
-            var queryableEntity = _dbSet.Where(x => x.Id == id);
+            IQueryable<TEntity> queryableEntity = _dbSet;
+            if (filter != null)
+                queryableEntity = queryableEntity.Where(filter);
+            
             queryableEntity = includeExpressions.Aggregate(queryableEntity, (current, includeExpression) => current.Include(includeExpression));
             
             return await queryableEntity.FirstOrDefaultAsync() ?? throw new DataNotFoundException(string.Format(AppConstant.ErrorMessage.DbDataNotFound, typeof(TEntity).Name));
-        }
-
-        public virtual async Task<TEntity> GetByIdAsync(int id)
-        {
-            return await _dbSet.FirstOrDefaultAsync(x => x.Id == id) ?? throw new DataNotFoundException(string.Format(AppConstant.ErrorMessage.DbDataNotFound, typeof(TEntity).Name));
         }
 
         public virtual void Insert(TEntity entity)
@@ -58,12 +56,4 @@ public class RepositoryBase<TEntity, TContext> : IRepositoryBase<TEntity>
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
         }
-
-        public virtual void Delete(TEntity entity)
-        {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
-
-            _dbSet.Remove(entity);
-        }
-    }
+}

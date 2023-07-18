@@ -9,14 +9,10 @@ namespace TvMazeApp.Scraper.App.Controllers;
 [ApiController]
 public class TvShowsController : ControllerBase
 {
-    private readonly ILogger<TvShowsController> _logger;
     private readonly ITvShowService _tvShowService;
 
-    public TvShowsController(
-        ILogger<TvShowsController> logger,
-        ITvShowService tvShowService)
+    public TvShowsController(ITvShowService tvShowService)
     {
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _tvShowService = tvShowService ?? throw new ArgumentNullException(nameof(tvShowService));
     }
         

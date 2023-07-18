@@ -4,8 +4,9 @@ public static class ScraperConstant
 {
     public static class Uri
     {
-        public const string SearchShowUri = "search/shows?q={0}";
+        public const string SearchShowUriByShowName = "search/shows?q={0}";
         public const string ShowEpisodeListUri = "{0}?embed=episodes";
+        public const string SearchShowUriById = $"shows/{ShowEpisodeListUri}";
     }
     
     public static class ApiStatusResult

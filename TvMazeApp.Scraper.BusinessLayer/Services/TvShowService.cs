@@ -29,7 +29,7 @@ public class TvShowService : ServiceBase, ITvShowService
         if (string.IsNullOrWhiteSpace(showName))
             throw new ParameterException(AppConstant.ErrorMessage.TvShowNameParameterNullOrEmpty);
 
-        var showsResponse = await _apiCaller.GetTvShowsByNameAsync(string.Format(ScraperConstant.Uri.SearchShowUri, showName));
+        var showsResponse = await _apiCaller.GetTvShowsByNameAsync(string.Format(ScraperConstant.Uri.SearchShowUriByShowName, showName));
         showsResponse = await GetNotExistedTvShowsAsync(showsResponse);
         if (!showsResponse.Any())
             return new TvShowAddResponse(

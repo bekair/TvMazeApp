@@ -7,9 +7,7 @@ public interface IRepositoryBase<TEntity>
     where TEntity : class, IEntity
 {
     Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null);
-    Task<TEntity> GetIncludeByAsync(int id, params Expression<Func<TEntity, object>>[] includeExpressions);
-    Task<TEntity> GetByIdAsync(int id);
+    Task<TEntity> GetIncludeByAsync(Expression<Func<TEntity, bool>>? filter = null, params Expression<Func<TEntity, object>>[] includeExpressions);
     void Insert(TEntity entity);
     void Update(TEntity entity);
-    void Delete(TEntity entity);
 }
