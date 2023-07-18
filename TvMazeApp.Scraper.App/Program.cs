@@ -47,7 +47,7 @@ builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
 builder.Services.AddScoped<IApiCaller, ApiCaller>();
 builder.Services.AddScoped<ITvShowService, TvShowService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddDbContext<TvMazeContext>(options => options.UseSqlServer(tvMazeSettings.ConnectionString));
+builder.Services.AddDbContext<TvMazeContext>(options => options.UseSqlServer(tvMazeSettings.ConnectionString!));
 
 builder.Services.AddControllersWithViews();
 
@@ -56,7 +56,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<TvMazeContext>();
-    db.Database.Migrate();
+    await db.Database.MigrateAsync();
 }
 
 // Configure the HTTP request pipeline.

@@ -48,18 +48,24 @@ namespace TvMazeApp.ApiDataSyncWorker
             catch (HttpRequestException ex)
             {
                 if (ex.StatusCode == HttpStatusCode.NotFound)
-                    return new OkObjectResult(AppConstant.ErrorMessage.NoTvShowExists);
+                    return new OkObjectResult(AppConstant.ErrorMessage.NoTvShowsExistedInApiWithTheApiId);
 
                 throw ex;
             }
             catch (DataNotFoundException)
             {
-                return new OkObjectResult(AppConstant.ErrorMessage.NoTvShowExists);
+                return new OkObjectResult(AppConstant.ErrorMessage.NoTvShowsExistedInApiWithTheApiId);
             }
 
             TvShow notUpdatedTvShow;
             try
             {
+                var isTvShowWithTheApiIdExisted = (await _unitOfWork.TvShowRepository
+                    .GetAsync(s => s.ApiId == tvShowApiId)
+                ).Any();
+                if (!isTvShowWithTheApiIdExisted)
+                    return new OkObjectResult(AppConstant.ErrorMessage.NoTvShowsExistedInDbWithTheApiId);
+
                 notUpdatedTvShow = await _unitOfWork.TvShowRepository.GetIncludeByAsync(s =>
                         s.ApiId == tvShowApiId &&
                         s.Updated != apiTvShowWithEpisodes.Updated,
