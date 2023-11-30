@@ -26,7 +26,7 @@ builder.Services.AddDbContext<TvMazeContext>(options => options.UseSqlServer(con
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddEndpointsApiExplorer(); //For Minimal API. It's not needed here. Could be deleted.
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
